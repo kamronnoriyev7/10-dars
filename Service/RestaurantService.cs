@@ -123,5 +123,42 @@ public class RestaurantService
         return true;
     }
 
+    public List<Restaurant> GetRestaurantsByLocation(string location)
+    {
+        var restaurantsByLocation = new List<Restaurant>();
+        foreach (var restaurant in listRestaurant)
+        {
+            if (restaurant.Location ==location)
+            {
+                restaurantsByLocation.Add(restaurant);
+            }
+        }
+
+        return restaurantsByLocation;
+    }
+
+    public Dish GetCheapestDishAcrossRestaurants(List<Dish> listDish)
+    {
+        var minPrice = int.MaxValue;
+        var minDishPrice = new Dish();
+        var cheapestDishAcrossRestaurants = new List<Dish>();
+        foreach (var restaurant in listRestaurant)
+        {
+            foreach (var dish in listDish)
+            {
+                if (dish.Price<minPrice)
+                {
+                   dish.Price=minPrice;
+                   minDishPrice=dish;
+                }
+            }
+        }
+
+        return minDishPrice;
+    }
+
+    
+        
+
    
 }
